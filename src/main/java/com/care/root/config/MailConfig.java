@@ -14,8 +14,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 	   JavaMailSenderImpl jms = new JavaMailSenderImpl();
 	   jms.setHost("smtp.gmail.com");//google smtp 서버 설정
 	   jms.setPort(587);//google smtp 메일 포트
-	   jms.setUsername("nyu222671@gmail.com");//본인 지메일 
-	   jms.setPassword("Pab2$6:dM");//본인 지메일 비번
+	   jms.setUsername("~@gmail.com");//본인 지메일 
+	   jms.setPassword("비밀번호");//본인 지메일 비번
 
 	   Properties prop = new Properties();
 	   prop.setProperty("mail.transport.protocol", "smtp");
