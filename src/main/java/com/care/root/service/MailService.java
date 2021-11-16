@@ -13,11 +13,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MailService {
-	@Autowired JavaMailSender mailSender;
-	public void sendMail(String to, String subject, String body) {
-		MimeMessage message = mailSender.createMimeMessage();
+	@Autowired JavaMailSender mailSender;//JavaMailSender로 mailSender(config)를 빈으로 얻어옴
+	public void sendMail(String to, String subject, String body) {//(보내는 곳, 제목, 내용)
+		MimeMessage message = mailSender.createMimeMessage();//받는 사용자에 대한 세팅(MimeMessageHelper를 위해 message가 필요한것)
 		try {
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			//MimeMessageHelper : 실질적으로 사용자에게 보낼 내용을 저장
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");//true : 멀티팟 허용
 			helper.setTo(to);
 			helper.setSubject(subject);
 			helper.setText(body, true);//true를 적어줘야 html형식으로 넘어간다. 안그럼 text형식으로 감
@@ -28,9 +29,10 @@ public class MailService {
 			e.printStackTrace();
 		}
 	}
+		//이메일 로그인 인증
 	   public void auth(HttpServletRequest request) {
 		      HttpSession session = request.getSession();
-		      String userid = "yujin";
+		      String userid = "jin";
 		      String userkey = rand();
 		      session.setAttribute(userid, userkey);
 		      String body="<h2>안녕하세요 아뱅입니다</h2><hr>"
@@ -39,7 +41,7 @@ public class MailService {
 		            +"<a href='http://localhost:8089"
 		            +request.getContextPath()+"/auth_check?userid="
 		            +userid+"&userkey="+userkey+"'>인증하기</a>";
-		      sendMail("youjin9874@naver.com","이메일 인증입니다",body);
+		      sendMail("@naver.com","이메일 인증입니다",body);
 		   }
 		   private String rand() {
 		      Random ran = new Random();
